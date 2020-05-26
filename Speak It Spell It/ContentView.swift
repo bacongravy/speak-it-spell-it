@@ -12,6 +12,8 @@ import AVKit
 struct ContentView: View {
     @ObservedObject var wordRecognizer = WordRecognizer()
     @ObservedObject var wordSynthesizer = WordSynthesizer()
+    @ObservedObject var settingsModel = SettingsModel()
+
     @State private var infoPopoverIsPresented: Bool = false
 
     @State var translation = CGSize.zero
@@ -42,6 +44,17 @@ struct ContentView: View {
                     isPresented: self.$infoPopoverIsPresented
                 ) { InfoPopover() }
                 Spacer()
+                Button(action: {
+                    self.settingsModel.gearPopoverIsPresented = true
+                }, label: {
+                    Image(systemName: "gear")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 32)
+                    .padding()
+                }).popover(
+                    isPresented: self.$settingsModel.gearPopoverIsPresented
+                ) { GearPopover(isPresented: self.$settingsModel.gearPopoverIsPresented, selectedVoiceIndex: self.$settingsModel.selectedVoiceIndex) }
             }
             Spacer()
             Text(self.wordRecognizer.word.isEmpty ?
@@ -81,7 +94,7 @@ struct ContentView: View {
     func speak() {
         self.wordSynthesizer.isSpeaking
             ? self.wordSynthesizer.stop()
-            : self.wordSynthesizer.speak(self.wordRecognizer.word)
+            : self.wordSynthesizer.speak(self.wordRecognizer.word, voice: self.settingsModel.selectedVoice)
     }
 }
 
