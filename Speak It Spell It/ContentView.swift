@@ -14,6 +14,19 @@ struct ContentView: View {
     @ObservedObject var wordSynthesizer = WordSynthesizer()
     @State private var infoPopoverIsPresented: Bool = false
 
+    @State var translation = CGSize.zero
+    
+    var drag: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                self.translation = value.translation }
+            .onEnded { _ in
+                withAnimation(.spring()) {
+                    self.translation = .zero
+                }
+            }
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -36,6 +49,8 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .fontWeight(.black).foregroundColor(self.wordRecognizer.word.isEmpty ? .gray : .black)
                 .multilineTextAlignment(.center)
+                .offset(self.translation)
+                .gesture(drag)
             Spacer()
             HStack {
                 Button(action: {
