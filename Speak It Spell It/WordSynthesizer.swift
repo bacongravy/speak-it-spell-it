@@ -35,7 +35,6 @@ class WordSynthesizer: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     func speak(_ word: String, voice: AVSpeechSynthesisVoice? = nil) {
         func makeUtterance(_ string: String) -> AVSpeechUtterance {
             let u = AVSpeechUtterance(string: string)
-            u.rate = 0.5
             u.postUtteranceDelay = 0.5
             u.voice = voice
             return u
