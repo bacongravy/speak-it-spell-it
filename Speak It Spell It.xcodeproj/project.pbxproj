@@ -15,6 +15,7 @@
 		A4A939DF2479E9750019E4C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4A939DD2479E9750019E4C3 /* LaunchScreen.storyboard */; };
 		A4A939E72479E9A60019E4C3 /* WordRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A939E62479E9A60019E4C3 /* WordRecognizer.swift */; };
 		A4A939E92479E9C00019E4C3 /* WordSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A939E82479E9C00019E4C3 /* WordSynthesizer.swift */; };
+		A4A939F1247D96930019E4C3 /* InfoPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A939F0247D96930019E4C3 /* InfoPopover.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		A4A939E02479E9750019E4C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4A939E62479E9A60019E4C3 /* WordRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordRecognizer.swift; sourceTree = "<group>"; };
 		A4A939E82479E9C00019E4C3 /* WordSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSynthesizer.swift; sourceTree = "<group>"; };
+		A4A939F0247D96930019E4C3 /* InfoPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoPopover.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				A4A939D22479E9730019E4C3 /* AppDelegate.swift */,
 				A4A939D42479E9730019E4C3 /* SceneDelegate.swift */,
 				A4A939D62479E9730019E4C3 /* ContentView.swift */,
+				A4A939F0247D96930019E4C3 /* InfoPopover.swift */,
 				A4A939E62479E9A60019E4C3 /* WordRecognizer.swift */,
 				A4A939E82479E9C00019E4C3 /* WordSynthesizer.swift */,
 				A4A939D82479E9750019E4C3 /* Assets.xcassets */,
@@ -157,6 +160,7 @@
 				A4A939D52479E9730019E4C3 /* SceneDelegate.swift in Sources */,
 				A4A939D72479E9730019E4C3 /* ContentView.swift in Sources */,
 				A4A939E72479E9A60019E4C3 /* WordRecognizer.swift in Sources */,
+				A4A939F1247D96930019E4C3 /* InfoPopover.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

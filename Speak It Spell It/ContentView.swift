@@ -12,9 +12,24 @@ import AVKit
 struct ContentView: View {
     @ObservedObject var wordRecognizer = WordRecognizer()
     @ObservedObject var wordSynthesizer = WordSynthesizer()
+    @State private var infoPopoverIsPresented: Bool = false
 
     var body: some View {
         VStack {
+            HStack {
+                Button(action: {
+                    self.infoPopoverIsPresented = true
+                }, label: {
+                    Image(systemName: "info.circle")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 32)
+                        .padding()
+                }).popover(
+                    isPresented: self.$infoPopoverIsPresented
+                ) { InfoPopover() }
+                Spacer()
+            }
             Spacer()
             Text(self.wordRecognizer.word.isEmpty ?
                 "Press the mic button and speak a word" : self.wordRecognizer.word)
