@@ -75,15 +75,6 @@ class WordSynthesizer: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         self.stopAudioSession()
     }
     
-    private func repeatedlySyncWithSynthesizerWhileSpeaking() {
-        if (self.isSpeaking == true) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.isSpeaking = self.speechSynthesizer.isSpeaking
-                self.repeatedlySyncWithSynthesizerWhileSpeaking()
-            }
-        }
-    }
-
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
         self.isSpeaking = true
     }
