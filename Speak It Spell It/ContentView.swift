@@ -40,9 +40,9 @@ struct ContentView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 32)
                         .padding()
-                }).popover(
+                }).sheet(
                     isPresented: self.$infoPopoverIsPresented
-                ) { InfoPopover() }
+                ) { InfoSheet() }
                 Spacer()
                 Button(action: {
                     self.settingsModel.gearPopoverIsPresented = true
@@ -52,9 +52,9 @@ struct ContentView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 32)
                     .padding()
-                }).popover(
+                }).sheet(
                     isPresented: self.$settingsModel.gearPopoverIsPresented
-                ) { GearPopover(isPresented: self.$settingsModel.gearPopoverIsPresented, selectedVoiceIndex: self.$settingsModel.selectedVoiceIndex) }
+                ) { GearSheet(isPresented: self.$settingsModel.gearPopoverIsPresented, selectedVoiceIndex: self.$settingsModel.selectedVoiceIndex) }
             }
             Spacer()
             Text(self.wordRecognizer.word.isEmpty ?

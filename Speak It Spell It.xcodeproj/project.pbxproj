@@ -15,9 +15,9 @@
 		A4A939DF2479E9750019E4C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4A939DD2479E9750019E4C3 /* LaunchScreen.storyboard */; };
 		A4A939E72479E9A60019E4C3 /* WordRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A939E62479E9A60019E4C3 /* WordRecognizer.swift */; };
 		A4A939E92479E9C00019E4C3 /* WordSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A939E82479E9C00019E4C3 /* WordSynthesizer.swift */; };
-		A4A939ED247C67A60019E4C3 /* GearPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A939EC247C67A60019E4C3 /* GearPopover.swift */; };
+		A4A939ED247C67A60019E4C3 /* GearSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A939EC247C67A60019E4C3 /* GearSheet.swift */; };
 		A4A939EF247D937B0019E4C3 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A939EE247D937B0019E4C3 /* SettingsModel.swift */; };
-		A4A939F1247D96930019E4C3 /* InfoPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A939F0247D96930019E4C3 /* InfoPopover.swift */; };
+		A4A939F1247D96930019E4C3 /* InfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A939F0247D96930019E4C3 /* InfoSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,9 +31,9 @@
 		A4A939E02479E9750019E4C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4A939E62479E9A60019E4C3 /* WordRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordRecognizer.swift; sourceTree = "<group>"; };
 		A4A939E82479E9C00019E4C3 /* WordSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSynthesizer.swift; sourceTree = "<group>"; };
-		A4A939EC247C67A60019E4C3 /* GearPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearPopover.swift; sourceTree = "<group>"; };
+		A4A939EC247C67A60019E4C3 /* GearSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearSheet.swift; sourceTree = "<group>"; };
 		A4A939EE247D937B0019E4C3 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
-		A4A939F0247D96930019E4C3 /* InfoPopover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoPopover.swift; sourceTree = "<group>"; };
+		A4A939F0247D96930019E4C3 /* InfoSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,8 +69,8 @@
 				A4A939D22479E9730019E4C3 /* AppDelegate.swift */,
 				A4A939D42479E9730019E4C3 /* SceneDelegate.swift */,
 				A4A939D62479E9730019E4C3 /* ContentView.swift */,
-				A4A939F0247D96930019E4C3 /* InfoPopover.swift */,
-				A4A939EC247C67A60019E4C3 /* GearPopover.swift */,
+				A4A939F0247D96930019E4C3 /* InfoSheet.swift */,
+				A4A939EC247C67A60019E4C3 /* GearSheet.swift */,
 				A4A939EE247D937B0019E4C3 /* SettingsModel.swift */,
 				A4A939E62479E9A60019E4C3 /* WordRecognizer.swift */,
 				A4A939E82479E9C00019E4C3 /* WordSynthesizer.swift */,
@@ -166,9 +166,9 @@
 				A4A939D32479E9730019E4C3 /* AppDelegate.swift in Sources */,
 				A4A939D52479E9730019E4C3 /* SceneDelegate.swift in Sources */,
 				A4A939D72479E9730019E4C3 /* ContentView.swift in Sources */,
-				A4A939ED247C67A60019E4C3 /* GearPopover.swift in Sources */,
+				A4A939ED247C67A60019E4C3 /* GearSheet.swift in Sources */,
 				A4A939E72479E9A60019E4C3 /* WordRecognizer.swift in Sources */,
-				A4A939F1247D96930019E4C3 /* InfoPopover.swift in Sources */,
+				A4A939F1247D96930019E4C3 /* InfoSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

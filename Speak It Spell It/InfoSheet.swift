@@ -1,5 +1,5 @@
 //
-//  InfoPopover.swift
+//  InfoSheet.swift
 //  Speak It Spell It
 //
 //  Created by David Kramer on 5/25/20.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct InfoPopover: View {
+struct InfoSheet: View {
     var body: some View {
         VStack {
             Text("Speak It Spell It")
@@ -18,8 +18,8 @@ struct InfoPopover: View {
     }
 }
 
-struct InfoPopover_Previews: PreviewProvider {
+struct InfoSheet_Previews: PreviewProvider {
     static var previews: some View {
-        InfoPopover()
+        InfoSheet()
     }
 }

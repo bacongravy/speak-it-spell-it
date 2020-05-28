@@ -1,5 +1,5 @@
 //
-//  GearPopover.swift
+//  GearSheet.swift
 //  Speak It Spell It
 //
 //  Created by David Kramer on 5/25/20.
@@ -30,7 +30,7 @@ struct SelectionCell: View {
     }
 }
 
-struct GearPopover: View {
+struct GearSheet: View {
     @Binding var isPresented: Bool
     @Binding var selectedVoiceIndex: Int
     private let voices = WordSynthesizer.voices()
@@ -46,14 +46,12 @@ struct GearPopover: View {
                 }
             }
         }
-        .frame(minWidth: 300, idealWidth: nil, maxWidth: nil, minHeight: 400, idealHeight: nil, maxHeight: nil, alignment: .leading)
-            
     }
 }
 
-struct GearPopover_Previews: PreviewProvider {
+struct GearSheet_Previews: PreviewProvider {
     static var previews: some View {
-        GearPopover(isPresented: .constant(true), selectedVoiceIndex: .constant(0))
+        GearSheet(isPresented: .constant(true), selectedVoiceIndex: .constant(0))
     }
 }
 
