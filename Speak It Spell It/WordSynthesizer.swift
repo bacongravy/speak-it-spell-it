@@ -11,7 +11,7 @@ import AVKit
 
 class WordSynthesizer: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     
-    let speechSynthesizer = AVSpeechSynthesizer()
+    var speechSynthesizer: AVSpeechSynthesizer?
     var utterances = Array<AVSpeechUtterance>()
 
     @Published var isSpeaking: Bool = false
@@ -27,11 +27,6 @@ class WordSynthesizer: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         return self.voices().firstIndex { $0.name == "Samantha" } ?? 0
     }
     
-    override init (){
-        super.init()
-        self.speechSynthesizer.delegate = self
-    }
-    
     private func startAudioSession() {
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: .duckOthers)
@@ -39,9 +34,13 @@ class WordSynthesizer: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         } catch {
             print("Could not start AVAudioSession.")
         }
+        self.speechSynthesizer = AVSpeechSynthesizer()
+        self.speechSynthesizer?.delegate = self
     }
     
     private func stopAudioSession () {
+        self.speechSynthesizer?.stopSpeaking(at: .immediate)
+        self.speechSynthesizer = nil
         do {
             try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
         } catch {
@@ -50,6 +49,7 @@ class WordSynthesizer: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     }
     
     func speak(_ word: String, voice: AVSpeechSynthesisVoice? = nil) {
+        guard self.speechSynthesizer == nil else { return }
         func makeUtterance(_ string: String) -> AVSpeechUtterance {
             let u = AVSpeechUtterance(string: string)
             u.postUtteranceDelay = 0.5
@@ -64,13 +64,10 @@ class WordSynthesizer: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         utterances.append(makeUtterance(letters))
         utterances.append(makeUtterance(word))
         self.startAudioSession()
-        utterances.forEach { speechSynthesizer.speak($0) }
+        utterances.forEach { self.speechSynthesizer?.speak($0) }
     }
     
     func stop() {
-        self.speechSynthesizer.pauseSpeaking(at: .immediate)
-        self.speechSynthesizer.stopSpeaking(at: .immediate)
-        self.speechSynthesizer.continueSpeaking()
         self.isSpeaking = false
         self.stopAudioSession()
     }
