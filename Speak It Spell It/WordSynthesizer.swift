@@ -32,6 +32,23 @@ class WordSynthesizer: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         self.speechSynthesizer.delegate = self
     }
     
+    private func startAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: .duckOthers)
+            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+        } catch {
+            print("Could not start AVAudioSession.")
+        }
+    }
+    
+    private func stopAudioSession () {
+        do {
+            try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        } catch {
+            print("Could not stop AVAudioSession.")
+        }
+    }
+    
     func speak(_ word: String, voice: AVSpeechSynthesisVoice? = nil) {
         func makeUtterance(_ string: String) -> AVSpeechUtterance {
             let u = AVSpeechUtterance(string: string)
@@ -46,13 +63,16 @@ class WordSynthesizer: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         utterances.append(makeUtterance(word))
         utterances.append(makeUtterance(letters))
         utterances.append(makeUtterance(word))
+        self.startAudioSession()
         utterances.forEach { speechSynthesizer.speak($0) }
     }
     
     func stop() {
+        self.speechSynthesizer.pauseSpeaking(at: .immediate)
         self.speechSynthesizer.stopSpeaking(at: .immediate)
         self.speechSynthesizer.continueSpeaking()
         self.isSpeaking = false
+        self.stopAudioSession()
     }
     
     private func repeatedlySyncWithSynthesizerWhileSpeaking() {
@@ -70,12 +90,12 @@ class WordSynthesizer: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         if (utterance == self.utterances.last) {
-            self.isSpeaking = false
+            self.stop()
         }
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
-        self.isSpeaking = false
+        self.stop()
     }
 
 }
