@@ -60,7 +60,7 @@ struct ContentView: View {
             Text(self.wordRecognizer.word.isEmpty ?
                 "Press the mic button and speak a word" : self.wordRecognizer.word)
                 .font(.largeTitle)
-                .fontWeight(.black).foregroundColor(self.wordRecognizer.word.isEmpty ? .gray : .black)
+                .fontWeight(.black).foregroundColor(self.wordRecognizer.word.isEmpty ? .gray : .primary)
                 .multilineTextAlignment(.center)
                 .offset(self.translation)
                 .gesture(drag)
