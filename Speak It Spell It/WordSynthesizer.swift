@@ -15,6 +15,7 @@ class WordSynthesizer: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     var utterances = Array<AVSpeechUtterance>()
 
     @Published var isSpeaking: Bool = false
+    @Published var indexOfSpokenLetter: Int = -1
 
     static func voices() -> [AVSpeechSynthesisVoice] {
         return AVSpeechSynthesisVoice
@@ -50,19 +51,20 @@ class WordSynthesizer: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     
     func speak(_ word: String, voice: AVSpeechSynthesisVoice? = nil) {
         guard self.speechSynthesizer == nil else { return }
-        func makeUtterance(_ string: String) -> AVSpeechUtterance {
+        func makeUtterance(_ string: String, preDelay: TimeInterval = 0, postDelay: TimeInterval = 0) -> AVSpeechUtterance {
             let u = AVSpeechUtterance(string: string)
-            u.postUtteranceDelay = 0.5
+            u.preUtteranceDelay = preDelay
+            u.postUtteranceDelay = postDelay
             u.voice = voice
             return u
         }
-        let letters = word
-            .map(String.init)
-            .joined(separator: ", ")
         utterances.removeAll()
-        utterances.append(makeUtterance(word))
-        utterances.append(makeUtterance(letters))
-        utterances.append(makeUtterance(word))
+        utterances.append(makeUtterance(word, postDelay: 0.5))
+        word
+            .lowercased()
+            .map(String.init)
+            .forEach { utterances.append(makeUtterance($0, postDelay: 0.2)) }
+        utterances.append(makeUtterance(word, preDelay: 0.5, postDelay: 0.5))
         self.startAudioSession()
         utterances.forEach { self.speechSynthesizer?.speak($0) }
     }
@@ -72,8 +74,19 @@ class WordSynthesizer: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         self.stopAudioSession()
     }
     
+    private func indexOfUtterance(_ utterance: AVSpeechUtterance) -> Int {
+        if let index = utterances.firstIndex(of: utterance) {
+            if index < utterances.count - 1 {
+                return index
+            }
+            else { return 0 }
+        }
+        else { return 0 }
+    }
+    
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
         self.isSpeaking = true
+        self.indexOfSpokenLetter = self.indexOfUtterance(utterance) - 1
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {

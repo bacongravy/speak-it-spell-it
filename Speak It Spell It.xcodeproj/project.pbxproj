@@ -18,6 +18,7 @@
 		A4A939ED247C67A60019E4C3 /* GearSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A939EC247C67A60019E4C3 /* GearSheet.swift */; };
 		A4A939EF247D937B0019E4C3 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A939EE247D937B0019E4C3 /* SettingsModel.swift */; };
 		A4A939F1247D96930019E4C3 /* InfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A939F0247D96930019E4C3 /* InfoSheet.swift */; };
+		A4D3CF432483201000A0BE72 /* HighlightableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D3CF422483201000A0BE72 /* HighlightableText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		A4A939EC247C67A60019E4C3 /* GearSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearSheet.swift; sourceTree = "<group>"; };
 		A4A939EE247D937B0019E4C3 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		A4A939F0247D96930019E4C3 /* InfoSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoSheet.swift; sourceTree = "<group>"; };
+		A4D3CF422483201000A0BE72 /* HighlightableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightableText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				A4A939D62479E9730019E4C3 /* ContentView.swift */,
 				A4A939F0247D96930019E4C3 /* InfoSheet.swift */,
 				A4A939EC247C67A60019E4C3 /* GearSheet.swift */,
+				A4D3CF422483201000A0BE72 /* HighlightableText.swift */,
 				A4A939EE247D937B0019E4C3 /* SettingsModel.swift */,
 				A4A939E62479E9A60019E4C3 /* WordRecognizer.swift */,
 				A4A939E82479E9C00019E4C3 /* WordSynthesizer.swift */,
@@ -164,6 +167,7 @@
 				A4A939EF247D937B0019E4C3 /* SettingsModel.swift in Sources */,
 				A4A939E92479E9C00019E4C3 /* WordSynthesizer.swift in Sources */,
 				A4A939D32479E9730019E4C3 /* AppDelegate.swift in Sources */,
+				A4D3CF432483201000A0BE72 /* HighlightableText.swift in Sources */,
 				A4A939D52479E9730019E4C3 /* SceneDelegate.swift in Sources */,
 				A4A939D72479E9730019E4C3 /* ContentView.swift in Sources */,
 				A4A939ED247C67A60019E4C3 /* GearSheet.swift in Sources */,

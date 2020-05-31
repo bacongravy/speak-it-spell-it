@@ -57,10 +57,12 @@ struct ContentView: View {
                 ) { GearSheet(isPresented: self.$settingsModel.gearPopoverIsPresented, selectedVoiceIndex: self.$settingsModel.selectedVoiceIndex) }
             }
             Spacer()
-            Text(self.wordRecognizer.word.isEmpty ?
-                "Press the mic button and speak a word" : self.wordRecognizer.word)
+            HighlightableText(string: self.wordRecognizer.word,
+                              placeholder: "Press the mic button and speak a word",
+                              indexOfHighlightedLetter: self.$wordSynthesizer.indexOfSpokenLetter,
+                              shouldHighlight: self.$wordSynthesizer.isSpeaking)
+                .fontWeight(.black)
                 .font(.largeTitle)
-                .fontWeight(.black).foregroundColor(self.wordRecognizer.word.isEmpty ? .gray : .primary)
                 .multilineTextAlignment(.center)
                 .offset(self.translation)
                 .gesture(drag)
