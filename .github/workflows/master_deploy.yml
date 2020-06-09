@@ -1,11 +1,12 @@
-name: master_build
+name: master_deploy
 
 on:
   push:
     branches: [ master ]
+    tags: [ v* ]
 
 jobs:
-  build:
+  deploy:
     runs-on: macos-latest
 
     steps:
@@ -21,7 +22,7 @@ jobs:
           function set-env-from-proj { 
             echo "::set-env name=$1::$(xcodebuild -scheme "$SCHEME" -showBuildSettings | grep " $1 " | sed "s/[ ]*$1 = //")"
           }
-          set-env-from-proj PRODUCT_MODULE_NAME
+          set-env-from-proj PRODUCT_NAME
 
       - name: Configure keychain
         run: |
@@ -53,7 +54,7 @@ jobs:
         run: |
           xcodebuild \
             -scheme "$SCHEME" \
-            -archivePath "build/$PRODUCT_MODULE_NAME.xcarchive" \
+            -archivePath "build/$PRODUCT_NAME.xcarchive" \
             archive \
             | xcpretty
 
@@ -61,9 +62,18 @@ jobs:
         shell: bash --noprofile --norc -eo pipefail {0}
         run: |
           xcodebuild \
-            -archivePath "build/$PRODUCT_MODULE_NAME.xcarchive" \
+            -archivePath "build/$PRODUCT_NAME.xcarchive" \
             -exportOptionsPlist ExportOptions.plist \
             -exportPath build \
             -allowProvisioningUpdates \
             -exportArchive \
             | xcpretty
+
+      - name: Upload .ipa
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          APP_STORE_CONNECT_USERNAME: ${{ secrets.APP_STORE_CONNECT_USERNAME }}
+          APP_STORE_CONNECT_PASSWORD: ${{ secrets.APP_STORE_CONNECT_PASSWORD }}
+        run: |
+          xcrun altool --validate-app -t ios -f "build/$PRODUCT_NAME.ipa" -u "$APP_STORE_CONNECT_USERNAME" -p "$APP_STORE_CONNECT_PASSWORD"
+          xcrun altool --upload-app -t ios -f "build/$PRODUCT_NAME.ipa" -u "$APP_STORE_CONNECT_USERNAME" -p "$APP_STORE_CONNECT_PASSWORD"
