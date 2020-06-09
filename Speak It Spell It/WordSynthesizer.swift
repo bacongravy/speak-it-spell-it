@@ -61,7 +61,6 @@ class WordSynthesizer: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         utterances.removeAll()
         utterances.append(makeUtterance(word, postDelay: 0.5))
         word
-            .lowercased()
             .map(String.init)
             .forEach { utterances.append(makeUtterance($0, postDelay: 0.2)) }
         utterances.append(makeUtterance(word, preDelay: 0.5, postDelay: 0.5))

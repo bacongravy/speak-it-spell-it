@@ -38,7 +38,7 @@ class WordRecognizer: ObservableObject {
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
             var isFinal = false
             if let result = result {
-                self.word = result.bestTranscription.formattedString
+                self.word = result.bestTranscription.formattedString.lowercased()
                 isFinal = result.isFinal
             }
             if error != nil || isFinal {
