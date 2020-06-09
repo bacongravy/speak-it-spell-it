@@ -49,17 +49,21 @@ jobs:
           echo "$PROVISIONING_PROFILE_DATA" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/${PROVISIONING_PROFILE_UUID}.mobileprovision
 
       - name: Build and archive app
+        shell: bash --noprofile --norc -eo pipefail {0}
         run: |
           xcodebuild \
             -scheme "$SCHEME" \
             -archivePath "build/$PRODUCT_MODULE_NAME.xcarchive" \
-            archive
+            archive \
+            | xcpretty
 
       - name: Export .ipa
+        shell: bash --noprofile --norc -eo pipefail {0}
         run: |
           xcodebuild \
             -archivePath "build/$PRODUCT_MODULE_NAME.xcarchive" \
             -exportOptionsPlist ExportOptions.plist \
             -exportPath build \
             -allowProvisioningUpdates \
-            -exportArchive
+            -exportArchive \
+            | xcpretty
