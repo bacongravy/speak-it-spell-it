@@ -51,13 +51,13 @@ jobs:
 
       - name: Build .ipa
         run: |
-          fastlane run build_app build_path:build
+          fastlane run build_app
 
       - name: Archive .ipa
         uses: actions/upload-artifact@v1
         with:
           name: ipa
-          path: "build/${{ env.PRODUCT_NAME }}.ipa"
+          path: "${{ env.PRODUCT_NAME }}.ipa"
 
       - name: Upload .ipa
         if: startsWith(github.ref, 'refs/tags/v')
@@ -65,5 +65,5 @@ jobs:
           APP_STORE_CONNECT_USERNAME: ${{ secrets.APP_STORE_CONNECT_USERNAME }}
           APP_STORE_CONNECT_PASSWORD: ${{ secrets.APP_STORE_CONNECT_PASSWORD }}
         run: |
-          xcrun altool --validate-app -t ios -f "build/$PRODUCT_NAME.ipa" -u "$APP_STORE_CONNECT_USERNAME" -p "$APP_STORE_CONNECT_PASSWORD"
-          xcrun altool --upload-app -t ios -f "build/$PRODUCT_NAME.ipa" -u "$APP_STORE_CONNECT_USERNAME" -p "$APP_STORE_CONNECT_PASSWORD"
+          xcrun altool --validate-app -t ios -f "$PRODUCT_NAME.ipa" -u "$APP_STORE_CONNECT_USERNAME" -p "$APP_STORE_CONNECT_PASSWORD"
+          xcrun altool --upload-app -t ios -f "$PRODUCT_NAME.ipa" -u "$APP_STORE_CONNECT_USERNAME" -p "$APP_STORE_CONNECT_PASSWORD"
