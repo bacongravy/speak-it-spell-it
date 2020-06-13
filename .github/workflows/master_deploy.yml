@@ -13,41 +13,23 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v2
 
-      - name: Find first scheme in project
-        run: |
-          echo "::set-env name=SCHEME::$(xcodebuild -list -json | jq -r '.project.schemes[0]')"
-
       - name: Set environment variables from project settings
         run: |
-          function set-env-from-proj { 
-            echo "::set-env name=$1::$(xcodebuild -scheme "$SCHEME" -showBuildSettings | grep " $1 " | sed "s/[ ]*$1 = //")"
-          }
-          set-env-from-proj PRODUCT_NAME
+          exec .github/scripts/set-env-from-xcodeproj.sh
 
-      - name: Configure keychain
-        run: |
-          security create-keychain -p "" build.keychain
-          security list-keychains -s build.keychain
-          security default-keychain -s build.keychain
-          security unlock-keychain -p "" build.keychain
-          security set-keychain-settings
-          security list-keychains
-
-      - name: Configure code signing
+      - name: Import certificate
         env:
           SIGNING_CERTIFICATE_P12_DATA: ${{ secrets.SIGNING_CERTIFICATE_P12_DATA }}
           SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
+        run: |
+          exec .github/scripts/import-certificate.sh
+
+      - name: Import profile
+        env:
           PROVISIONING_PROFILE_DATA: ${{ secrets.PROVISIONING_PROFILE_DATA }}
           PROVISIONING_PROFILE_UUID: ${{ secrets.PROVISIONING_PROFILE_UUID }}
         run: |
-          security import <(echo $SIGNING_CERTIFICATE_P12_DATA | base64 --decode) \
-                          -f pkcs12 \
-                          -k build.keychain \
-                          -P $SIGNING_CERTIFICATE_PASSWORD \
-                          -T /usr/bin/codesign
-          security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          echo "$PROVISIONING_PROFILE_DATA" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/${PROVISIONING_PROFILE_UUID}.mobileprovision
+          exec .github/scripts/import-profile.sh
 
       - name: Build .ipa
         run: |
