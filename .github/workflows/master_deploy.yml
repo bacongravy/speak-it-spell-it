@@ -69,6 +69,12 @@ jobs:
             -exportArchive \
             | xcpretty
 
+      - name: Archive .ipa
+        uses: actions/upload-artifact@v1
+        with:
+          name: ipa
+          path: "build/${{ env.PRODUCT_NAME }}.ipa"
+
       - name: Upload .ipa
         if: startsWith(github.ref, 'refs/tags/v')
         env:
