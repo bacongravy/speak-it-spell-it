@@ -59,6 +59,12 @@ jobs:
           name: ipa
           path: "${{ env.PRODUCT_NAME }}.ipa"
 
+      - name: Archive dSYM
+        uses: actions/upload-artifact@v1
+        with:
+          name: dsym
+          path: "${{ env.PRODUCT_NAME }}.app.dSYM.zip"
+
       - name: Upload .ipa
         if: startsWith(github.ref, 'refs/tags/v')
         env:
