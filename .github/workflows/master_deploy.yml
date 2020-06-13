@@ -56,13 +56,13 @@ jobs:
       - name: Archive .ipa
         uses: actions/upload-artifact@v1
         with:
-          name: ipa
+          name: "${{ env.PRODUCT_NAME }}.ipa"
           path: "${{ env.PRODUCT_NAME }}.ipa"
 
       - name: Archive dSYM
         uses: actions/upload-artifact@v1
         with:
-          name: dsym
+          name: "${{ env.PRODUCT_NAME }}.app.dSYM.zip"
           path: "${{ env.PRODUCT_NAME }}.app.dSYM.zip"
 
       - name: Upload .ipa
