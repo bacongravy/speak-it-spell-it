@@ -49,25 +49,9 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           echo "$PROVISIONING_PROFILE_DATA" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/${PROVISIONING_PROFILE_UUID}.mobileprovision
 
-      - name: Build and archive app
-        shell: bash --noprofile --norc -eo pipefail {0}
+      - name: Build .ipa
         run: |
-          xcodebuild \
-            -scheme "$SCHEME" \
-            -archivePath "build/$PRODUCT_NAME.xcarchive" \
-            archive \
-            | xcpretty
-
-      - name: Export .ipa
-        shell: bash --noprofile --norc -eo pipefail {0}
-        run: |
-          xcodebuild \
-            -archivePath "build/$PRODUCT_NAME.xcarchive" \
-            -exportOptionsPlist ExportOptions.plist \
-            -exportPath build \
-            -allowProvisioningUpdates \
-            -exportArchive \
-            | xcpretty
+          fastlane run build_app build_path:build
 
       - name: Archive .ipa
         uses: actions/upload-artifact@v1
